@@ -2,6 +2,8 @@ import { Suspense, lazy } from 'react';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import logo from '@/assets/logo-comercia.png';
+import LaserEffect from '@/components/LaserEffect';
 
 const TechCube = lazy(() => import('@/components/TechCube'));
 
@@ -21,34 +23,49 @@ export default function HeroSection() {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center pt-16 lg:pt-20 overflow-hidden">
-      {/* Background Grid */}
+
       <div className="absolute inset-0 cyber-grid opacity-30" />
       
-      {/* Gradient Orbs - smaller on mobile */}
+      {/* Gradiente Neon com Blur - Apenas no mobile */}
+      <div className="absolute inset-0 md:hidden bg-gradient-to-br from-blue-500/10 via-blue-400/5 to-blue-300/5 blur-3xl opacity-40" />
+      
+      {/* Efeito Laser Three.js - Apenas no mobile */}
+      <LaserEffect />
+     
       <div className="absolute top-1/4 left-1/4 w-48 md:w-72 lg:w-96 h-48 md:h-72 lg:h-96 bg-primary/20 rounded-full blur-[100px] animate-pulse" />
       <div className="absolute bottom-1/4 right-1/4 w-48 md:w-72 lg:w-96 h-48 md:h-72 lg:h-96 bg-accent/20 rounded-full blur-[100px] animate-pulse animation-delay-400" />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Left Content */}
+          
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="space-y-5 md:space-y-6 lg:space-y-8 text-center lg:text-left"
-          >
-            {/* Badge */}
+            className="space-y-5 md:space-y-6 lg:space-y-8 text-center lg:text-left">
+          
+            {/* Logo - Apenas no mobile */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="flex justify-center md:hidden mb-4"
+            >
+              <img src={logo} alt="ComercIA" className="h-12 w-auto" />
+            </motion.div>
+
+            {/* Badge MIDAS - Apenas no desktop */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/10"
+              className="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/10"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
               <span className="text-xs md:text-sm text-primary font-medium">Acelerada pela MIDAS</span>
             </motion.div>
 
-            {/* Title */}
+      
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -59,7 +76,7 @@ export default function HeroSection() {
               <span className="text-gradient">Inteligência Artificial</span>
             </motion.h1>
 
-            {/* Subtitle */}
+      
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -70,7 +87,7 @@ export default function HeroSection() {
               qualificam leads e agendam serviços via WhatsApp e Instagram.
             </motion.p>
 
-            {/* Benefits */}
+          
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -132,6 +149,16 @@ export default function HeroSection() {
           </motion.div>
         </div>
       </div>
+
+      {/* Acelerada pela MIDAS - Apenas no mobile, no final */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.8 }}
+        className="absolute bottom-16 left-1/2 -translate-x-1/2 md:hidden"
+      >
+        <span className="text-[10px] text-muted-foreground/70">Acelerada pela MIDAS</span>
+      </motion.div>
 
       {/* Scroll Indicator */}
       <motion.div
